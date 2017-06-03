@@ -6,13 +6,13 @@
  * Time: 下午9:53
  */
 
-namespace inhere\library\lock;
+namespace inhere\lock;
 
 use inhere\library\helpers\PhpHelper;
 
 /**
  * Class SemaphoreLock - Semaphore
- * @package inhere\library\lock
+ * @package inhere\lock
  */
 class SemaphoreLock extends BaseDriver
 {

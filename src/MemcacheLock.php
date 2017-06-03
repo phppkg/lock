@@ -6,11 +6,11 @@
  * Time: 下午10:04
  */
 
-namespace inhere\library\lock;
+namespace inhere\lock;
 
 /**
  * Class MemcacheLock
- * @package inhere\library\lock
+ * @package inhere\lock
  */
 class MemcacheLock extends BaseDriver
 {
