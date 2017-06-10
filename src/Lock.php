@@ -12,73 +12,64 @@ namespace inhere\lock;
  * Class Lock
  * @package inhere\lock
  */
-class Lock implements LockInterface
+class Lock
 {
-    const DRIVER_FILE = 'File';
-    const DRIVER_DB   = 'Database';
-    const DRIVER_MEM  = 'Memcache';
-    const DRIVER_SEM  = 'Semaphore';
-
-    /**
-     * @var LockInterface
-     */
-    private $driver;
+    const DRIVER_FILE = 'file';
+    const DRIVER_DB   = 'db';
+    const DRIVER_MEM  = 'mem';
+    const DRIVER_SEM  = 'sem';
 
     /**
      * @var array
      */
     private static $driverMap = [
-        self::DRIVER_FILE,
-        self::DRIVER_DB,
-        self::DRIVER_SEM,
-        self::DRIVER_MEM,
+        self::DRIVER_FILE => FileLock::class,
+        self::DRIVER_DB => DatabaseLock::class,
+        self::DRIVER_SEM => SemaphoreLock::class,
+        self::DRIVER_MEM => MemcacheLock::class,
     ];
 
     /**
      * Lock constructor.
      * @param array $options
-     * @param string $driverName
-     */
-    public function __construct(array $options = [], $driverName = null)
-    {
-        $this->driver = LockFactory::make($options, $driverName);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function lock($key, $timeout = Lock::EXPIRE)
-    {
-        $this->driver->lock($key, $timeout);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function unlock($key)
-    {
-        return $this->driver->unlock($key);
-    }
-
-    public function close()
-    {
-        $this->driver->close();
-    }
-
-    /**
+     * @param string $driver
      * @return LockInterface
+     * @throws \RuntimeException
      */
-    public function getDriver()
+    public static function make(array $options = [], $driver = null)
     {
-        return $this->driver;
+        $class = null;
+
+        if (!$driver && isset($options['driver'])) {
+            $driver = $options['driver'];
+            unset($options['driver']);
+        }
+
+        /** @var LockInterface $class */
+        if (isset(self::$driverMap[$driver])) {
+            $class = self::$driverMap[$driver];
+
+        } else {
+            foreach ([self::DRIVER_SEM, self::DRIVER_FILE] as $class) {
+                if ($class::isSupported()){
+                    break;
+                }
+            }
+        }
+
+        if (!$class) {
+            throw new \RuntimeException('No available driver! MAP: ' . implode(',', self::$driverMap));
+        }
+
+        return new $class($options);
     }
 
     /**
-     * @param LockInterface $driver
+     * @return array
      */
-    public function setDriver(LockInterface $driver)
+    public static function getDriverMap()
     {
-        $this->driver = $driver;
+        return self::$driverMap;
     }
 
     /**
@@ -86,6 +77,15 @@ class Lock implements LockInterface
      */
     public static function isSupported()
     {
-        return LockFactory::isSupported();
+        /** @var LockInterface $class */
+        foreach ([self::DRIVER_SEM, self::DRIVER_FILE] as $name) {
+            $class = self::$driverMap[$name];
+
+            if ($class::isSupported()){
+                return true;
+            }
+        }
+
+        return false;
     }
 }

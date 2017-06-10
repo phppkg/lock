@@ -17,7 +17,7 @@ class DatabaseLock extends BaseDriver
     /**
      * @var string
      */
-    protected $driver = LockFactory::DRIVER_DB;
+    protected $driver = Lock::DRIVER_DB;
 
     /**
      * @var \PDO

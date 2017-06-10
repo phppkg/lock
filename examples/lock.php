@@ -8,7 +8,7 @@
 require dirname(__DIR__) . '/../../autoload.php';
 
 
-$lk = \inhere\lock\LockFactory::make([
+$lk = \inhere\lock\Lock::make([
     'driver' => 'sem'
 ]);
 

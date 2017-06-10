@@ -19,7 +19,7 @@ class SemaphoreLock extends BaseDriver
     /**
      * @var string
      */
-    protected $driver = LockFactory::DRIVER_SEM;
+    protected $driver = Lock::DRIVER_SEM;
 
     /**
      * A numeric shared memory segment ID

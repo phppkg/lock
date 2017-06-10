@@ -20,7 +20,7 @@ class FileLock extends BaseDriver
     /**
      * @var string
      */
-    protected $driver = LockFactory::DRIVER_FILE;
+    protected $driver = Lock::DRIVER_FILE;
 
     /**
      * @var resource

@@ -19,7 +19,7 @@ class MemcacheLock extends BaseDriver
     /**
      * @var string
      */
-    protected $driver = LockFactory::DRIVER_MEM;
+    protected $driver = Lock::DRIVER_MEM;
 
     /**
      * @var \Memcached|\Memcache
