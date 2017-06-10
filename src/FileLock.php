@@ -18,6 +18,11 @@ namespace inhere\lock;
 class FileLock extends BaseDriver
 {
     /**
+     * @var string
+     */
+    protected $driver = LockFactory::DRIVER_FILE;
+
+    /**
      * @var resource
      */
     private $fp;
@@ -51,13 +56,14 @@ class FileLock extends BaseDriver
      * @param string $key
      * @param int $timeout
      * @return mixed
+     * @throws \RuntimeException
      */
     public function lock($key, $timeout = self::EXPIRE)
     {
         // $startTime = time();
         $file = sprintf('%s/%s.lock', $this->options['tmpDir'], md5(__FILE__ . $key));
 
-        if (!$this->fp = fopen($file, 'w+')) {
+        if (!$this->fp = fopen($file, 'wb+')) {
             throw new \RuntimeException('open file failed. FILE: ' . $file);
         }
 
@@ -72,6 +78,7 @@ class FileLock extends BaseDriver
 
     /**
      * {@inheritdoc}
+     * @throws \LogicException
      */
     public function unlock($key)
     {

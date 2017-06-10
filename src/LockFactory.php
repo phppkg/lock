@@ -14,44 +14,43 @@ namespace inhere\lock;
  */
 class LockFactory
 {
-    const DRIVER_FILE = 'File';
-    const DRIVER_DB   = 'Database';
-    const DRIVER_MEM  = 'Memcache';
-    const DRIVER_SEM  = 'Semaphore';
+    const DRIVER_FILE = 'file';
+    const DRIVER_DB   = 'db';
+    const DRIVER_MEM  = 'mem';
+    const DRIVER_SEM  = 'sem';
 
     /**
      * @var array
      */
     private static $driverMap = [
-        self::DRIVER_FILE,
-        self::DRIVER_DB,
-        self::DRIVER_SEM,
-        self::DRIVER_MEM,
+        self::DRIVER_FILE => FileLock::class,
+        self::DRIVER_DB => DatabaseLock::class,
+        self::DRIVER_SEM => SemaphoreLock::class,
+        self::DRIVER_MEM => MemcacheLock::class,
     ];
 
     /**
      * Lock constructor.
      * @param array $options
-     * @param string $driverName
+     * @param string $driver
      * @return LockInterface
+     * @throws \RuntimeException
      */
-    public static function make(array $options = [], $driverName = null)
+    public static function make(array $options = [], $driver = null)
     {
         $class = null;
 
-        if (!$driverName && isset($config['driver'])) {
-            $driverName = $config['driver'];
-            unset($config['driver']);
+        if (!$driver && isset($options['driver'])) {
+            $driver = $options['driver'];
+            unset($options['driver']);
         }
 
         /** @var LockInterface $class */
-        if (in_array($driverName, self::$driverMap, true)) {
-            $class = $driverName . 'Lock';
+        if (isset(self::$driverMap[$driver])) {
+            $class = self::$driverMap[$driver];
 
         } else {
-            foreach ([self::DRIVER_SEM, self::DRIVER_FILE] as $driverName) {
-                $class = $driverName . 'Lock';
-
+            foreach ([self::DRIVER_SEM, self::DRIVER_FILE] as $class) {
                 if ($class::isSupported()){
                     break;
                 }
@@ -79,8 +78,8 @@ class LockFactory
     public static function isSupported()
     {
         /** @var LockInterface $class */
-        foreach ([self::DRIVER_SEM, self::DRIVER_FILE] as $driverName) {
-            $class = $driverName . 'Lock';
+        foreach ([self::DRIVER_SEM, self::DRIVER_FILE] as $driver) {
+            $class = $driver . 'Lock';
 
             if ($class::isSupported()){
                 return true;

@@ -17,6 +17,11 @@ use inhere\library\helpers\PhpHelper;
 class SemaphoreLock extends BaseDriver
 {
     /**
+     * @var string
+     */
+    protected $driver = LockFactory::DRIVER_SEM;
+
+    /**
      * A numeric shared memory segment ID
      * @var int
      */
@@ -33,7 +38,7 @@ class SemaphoreLock extends BaseDriver
      */
     protected $options = [
         'key' => null,
-        'project' => 'php_sem',
+        'project' => 0,
         'permission' => 0664,
     ];
 
@@ -58,7 +63,7 @@ class SemaphoreLock extends BaseDriver
      */
     public function lock($key, $timeout = self::EXPIRE)
     {
-        return sem_acquire($this->semId);
+        return sem_acquire($this->semId); // , $noWait = false
     }
 
     /**

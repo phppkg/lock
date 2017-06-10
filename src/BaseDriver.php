@@ -21,7 +21,7 @@ abstract class BaseDriver implements LockInterface
     /**
      * @var string
      */
-    protected $name;
+    protected $driver;
 
     /**
      * @var array
@@ -31,11 +31,12 @@ abstract class BaseDriver implements LockInterface
     /**
      * BaseDriver constructor.
      * @param array $options
+     * @throws \RuntimeException
      */
     public function __construct(array $options = [])
     {
         if (!static::isSupported()) {
-            throw new \RuntimeException("Current environment is not support the lock driver: {$this->name}");
+            throw new \RuntimeException("Current environment is not support the lock driver: {$this->driver}");
         }
 
         $this->setOptions($options);
@@ -87,9 +88,9 @@ abstract class BaseDriver implements LockInterface
     /**
      * @return string
      */
-    public function getName()
+    public function getDriver(): string
     {
-        return $this->name;
+        return $this->driver;
     }
 
     /**

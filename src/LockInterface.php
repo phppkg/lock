@@ -32,7 +32,15 @@ interface LockInterface
      */
     public function unlock($key);
 
+    /**
+     * close
+     */
     public function close();
+
+    /**
+     * @return string
+     */
+    public function getDriver(): string;
 
     /**
      * @return bool

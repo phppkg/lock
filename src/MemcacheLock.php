@@ -17,6 +17,11 @@ class MemcacheLock extends BaseDriver
     const PREFIX = 'lock_';
 
     /**
+     * @var string
+     */
+    protected $driver = LockFactory::DRIVER_MEM;
+
+    /**
      * @var \Memcached|\Memcache
      */
     private $mem;

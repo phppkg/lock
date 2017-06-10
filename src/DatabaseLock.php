@@ -15,6 +15,11 @@ namespace inhere\lock;
 class DatabaseLock extends BaseDriver
 {
     /**
+     * @var string
+     */
+    protected $driver = LockFactory::DRIVER_DB;
+
+    /**
      * @var \PDO
      */
     private $db;
