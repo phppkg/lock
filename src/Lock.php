@@ -50,7 +50,9 @@ class Lock
             $class = self::$driverMap[$driver];
 
         } else {
-            foreach ([self::DRIVER_SEM, self::DRIVER_FILE] as $class) {
+            foreach ([self::DRIVER_SEM, self::DRIVER_FILE] as $name) {
+                $class = self::$driverMap[$name];
+
                 if ($class::isSupported()){
                     break;
                 }
