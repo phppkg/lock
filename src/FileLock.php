@@ -18,11 +18,6 @@ namespace inhere\lock;
 class FileLock extends BaseDriver
 {
     /**
-     * @var string
-     */
-    protected $driver = Lock::DRIVER_FILE;
-
-    /**
      * @var resource
      */
     private $fp;
@@ -43,6 +38,8 @@ class FileLock extends BaseDriver
     protected function init()
     {
         parent::init();
+
+        $this->driver = Lock::DRIVER_FILE;
 
         $this->options['single'] = (bool)$this->options['single'];
         $this->options['tmpDir'] = trim($this->options['tmpDir']);

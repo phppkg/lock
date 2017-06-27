@@ -17,11 +17,6 @@ class MemcacheLock extends BaseDriver
     const PREFIX = 'lock_';
 
     /**
-     * @var string
-     */
-    protected $driver = Lock::DRIVER_MEM;
-
-    /**
      * @var \Memcached|\Memcache
      */
     private $mem;
@@ -35,6 +30,8 @@ class MemcacheLock extends BaseDriver
             $this->setMem($options['mem']);
             unset($options['mem']);
         }
+
+        $this->driver = Lock::DRIVER_MEM;
 
         parent::__construct($options);
     }

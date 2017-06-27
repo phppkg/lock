@@ -15,11 +15,6 @@ namespace inhere\lock;
 class DatabaseLock extends BaseDriver
 {
     /**
-     * @var string
-     */
-    protected $driver = Lock::DRIVER_DB;
-
-    /**
      * @var \PDO
      */
     private $db;
@@ -33,6 +28,8 @@ class DatabaseLock extends BaseDriver
             $this->setDb($options['db']);
             unset($options['db']);
         }
+
+        $this->driver = Lock::DRIVER_DB;
 
         parent::__construct($options);
     }

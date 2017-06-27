@@ -17,11 +17,6 @@ use inhere\library\helpers\PhpHelper;
 class SemaphoreLock extends BaseDriver
 {
     /**
-     * @var string
-     */
-    protected $driver = Lock::DRIVER_SEM;
-
-    /**
      * A numeric shared memory segment ID
      * @var int
      */
@@ -45,6 +40,8 @@ class SemaphoreLock extends BaseDriver
     protected function init()
     {
         parent::init();
+
+        $this->driver = Lock::DRIVER_SEM;
 
         if ($this->options['key'] > 0) {
             $this->key = (int)$this->options['key'];
