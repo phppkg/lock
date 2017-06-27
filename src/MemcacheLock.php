@@ -37,9 +37,8 @@ class MemcacheLock extends BaseDriver
     }
 
     /**
-     * @param string $key
-     * @param int $timeout
-     * @return mixed
+     * {@inheritdoc}
+     * @throws \RuntimeException
      */
     public function lock($key, $timeout = self::EXPIRE)
     {

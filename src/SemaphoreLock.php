@@ -54,9 +54,7 @@ class SemaphoreLock extends BaseDriver
     }
 
     /**
-     * @param string $key
-     * @param int $timeout
-     * @return bool
+     * {@inheritdoc}
      */
     public function lock($key, $timeout = self::EXPIRE)
     {
@@ -64,8 +62,7 @@ class SemaphoreLock extends BaseDriver
     }
 
     /**
-     * @param string $key
-     * @return mixed
+     * {@inheritdoc}
      */
     public function unlock($key)
     {

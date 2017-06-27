@@ -22,13 +22,13 @@ interface LockInterface
     /**
      * @param string $key
      * @param int $timeout
-     * @return mixed
+     * @return bool
      */
     public function lock($key, $timeout = self::EXPIRE);
 
     /**
      * @param string $key
-     * @return mixed
+     * @return bool
      */
     public function unlock($key);
 

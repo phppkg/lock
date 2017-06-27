@@ -50,9 +50,7 @@ class FileLock extends BaseDriver
     }
 
     /**
-     * @param string $key
-     * @param int $timeout
-     * @return mixed
+     * {@inheritdoc}
      * @throws \RuntimeException
      */
     public function lock($key, $timeout = self::EXPIRE)
@@ -84,9 +82,11 @@ class FileLock extends BaseDriver
         }
 
         // 释放锁定
-        flock($this->fp, LOCK_UN);
+        $ret = flock($this->fp, LOCK_UN);
         fclose($this->fp);
         $this->fp = null;
+
+        return $ret;
     }
 
     /**

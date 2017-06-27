@@ -9,10 +9,11 @@ require dirname(__DIR__) . '/../../autoload.php';
 
 
 $lk = \inhere\lock\Lock::make([
-    'driver' => 'sem'
+    'driver' => 'file', // sem file
+    'tmpDir' => __DIR__
 ]);
 
-printf("Create SHM, driver: %s \n", $lk->getDriver());
+printf("Create Lock, driver: %s \n", $lk->getDriver());
 
 $ret = $lk->lock('test');
 

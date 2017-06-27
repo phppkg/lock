@@ -2,9 +2,9 @@
 .phpintel/
 !README.md
 !.gitkeep
-composer.lock
 *.swp
 *.log
 *.pid
 *.patch
+*.lock
 .DS_Store
