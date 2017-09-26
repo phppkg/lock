@@ -6,11 +6,11 @@
  * Time: 下午9:52
  */
 
-namespace inhere\lock;
+namespace Inhere\Lock;
 
 /**
  * Class Lock
- * @package inhere\lock
+ * @package Inhere\Lock
  */
 class Lock
 {

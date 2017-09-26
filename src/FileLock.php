@@ -6,14 +6,14 @@
  * Time: 下午9:53
  */
 
-namespace inhere\lock;
+namespace Inhere\Lock;
 
 /**
  * Class FileLock
  * - file lock
  * - support *nix and windows
  *
- * @package inhere\lock
+ * @package Inhere\Lock
  */
 class FileLock extends BaseDriver
 {

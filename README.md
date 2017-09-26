@@ -30,7 +30,7 @@ git clone https://github.com/inhere/php-lock.git // github
 ## 使用
 
 ```php
-use inhere\lock\Lock;
+use Inhere\Lock\Lock;
 
 $locker = new Lock([
     'driver' => '', // allow: File Database Memcache Semaphore

@@ -6,11 +6,11 @@
  * Time: 下午9:57
  */
 
-namespace inhere\lock;
+namespace Inhere\Lock;
 
 /**
  * Class DatabaseLock
- * @package inhere\lock
+ * @package Inhere\Lock
  */
 class DatabaseLock extends BaseDriver
 {

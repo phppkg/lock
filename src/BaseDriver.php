@@ -6,13 +6,13 @@
  * Time: 下午10:07
  */
 
-namespace inhere\lock;
+namespace Inhere\Lock;
 
 use inhere\library\traits\LiteOptionsTrait;
 
 /**
  * Class BaseDriver
- * @package inhere\lock
+ * @package Inhere\Lock
  */
 abstract class BaseDriver implements LockInterface
 {

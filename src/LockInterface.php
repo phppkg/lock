@@ -6,11 +6,11 @@
  * Time: 下午9:53
  */
 
-namespace inhere\lock;
+namespace Inhere\Lock;
 
 /**
  * Interface LockInterface
- * @package inhere\lock
+ * @package Inhere\Lock
  */
 interface LockInterface
 {
