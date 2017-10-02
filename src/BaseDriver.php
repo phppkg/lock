@@ -8,7 +8,7 @@
 
 namespace Inhere\Lock;
 
-use inhere\library\traits\LiteOptionsTrait;
+use Inhere\Library\Traits\LiteOptionsTrait;
 
 /**
  * Class BaseDriver

@@ -8,7 +8,7 @@
 
 namespace Inhere\Lock;
 
-use inhere\library\helpers\PhpHelper;
+use Inhere\Library\Helpers\PhpHelper;
 
 /**
  * Class SemaphoreLock - Semaphore
