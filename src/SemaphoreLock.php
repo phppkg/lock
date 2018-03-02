@@ -47,7 +47,7 @@ class SemaphoreLock extends BaseDriver
             $this->key = (int)$this->options['key'];
         } else {
             // 定义信号量key
-            $this->key = $this->options['key'] = PhpHelper::ftok(__FILE__, $this->options['project']);
+            $this->key = $this->options['key'] = self::ftok(__FILE__, $this->options['project']);
         }
 
         $this->semId = sem_get($this->key, 1, $this->options['permission']);
@@ -84,8 +84,33 @@ class SemaphoreLock extends BaseDriver
     /**
      * @return bool
      */
-    public static function isSupported()
+    public static function isSupported(): bool
     {
         return function_exists('sem_get');
+    }
+
+    /**
+     * @param string $pathname
+     * @param int|string $projectId This must be a one character
+     * @return int|string
+     * @throws \LogicException
+     */
+    public static function ftok($pathname, $projectId)
+    {
+        if (\strlen($projectId) > 1) {
+            throw new \LogicException("the project id must be a one character(int/str). Input: $projectId");
+        }
+
+        if (\function_exists('ftok')) {
+            return ftok($pathname, $projectId);
+        }
+
+        if (!$st = @stat($pathname)) {
+            return -1;
+        }
+
+        $key = sprintf('%u', ($st['ino'] & 0xffff) | (($st['dev'] & 0xff) << 16) | (($projectId & 0xff) << 24));
+
+        return $key;
     }
 }

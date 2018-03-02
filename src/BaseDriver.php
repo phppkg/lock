@@ -8,7 +8,7 @@
 
 namespace Inhere\Lock;
 
-use Inhere\Library\Traits\LiteOptionsTrait;
+use MyLib\SimpleConfig\LiteOptionsTrait;
 
 /**
  * Class BaseDriver
@@ -96,7 +96,7 @@ abstract class BaseDriver implements LockInterface
     /**
      * @return bool
      */
-    public static function isSupported()
+    public static function isSupported(): bool
     {
         return true;
     }
