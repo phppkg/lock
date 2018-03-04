@@ -8,8 +8,6 @@
 
 namespace Inhere\Lock;
 
-use Inhere\Library\Helpers\PhpHelper;
-
 /**
  * Class SemaphoreLock - Semaphore
  * @package Inhere\Lock
@@ -56,7 +54,7 @@ class SemaphoreLock extends BaseDriver
     /**
      * {@inheritdoc}
      */
-    public function lock($key, $timeout = self::EXPIRE)
+    public function lock($key, $timeout = self::EXPIRE): bool
     {
         return sem_acquire($this->semId); // , $noWait = false
     }
@@ -64,7 +62,7 @@ class SemaphoreLock extends BaseDriver
     /**
      * {@inheritdoc}
      */
-    public function unlock($key)
+    public function unlock($key): bool
     {
         return sem_release($this->semId);
     }
@@ -86,7 +84,7 @@ class SemaphoreLock extends BaseDriver
      */
     public static function isSupported(): bool
     {
-        return function_exists('sem_get');
+        return \function_exists('sem_get');
     }
 
     /**
@@ -95,7 +93,7 @@ class SemaphoreLock extends BaseDriver
      * @return int|string
      * @throws \LogicException
      */
-    public static function ftok($pathname, $projectId)
+    public static function ftok(string $pathname, $projectId)
     {
         if (\strlen($projectId) > 1) {
             throw new \LogicException("the project id must be a one character(int/str). Input: $projectId");

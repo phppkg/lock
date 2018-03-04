@@ -53,7 +53,7 @@ class FileLock extends BaseDriver
      * {@inheritdoc}
      * @throws \RuntimeException
      */
-    public function lock($key, $timeout = self::EXPIRE)
+    public function lock($key, $timeout = self::EXPIRE): bool
     {
         // $startTime = time();
         $file = sprintf('%s/%s.lock', $this->options['tmpDir'], md5(__FILE__ . $key));
@@ -75,7 +75,7 @@ class FileLock extends BaseDriver
      * {@inheritdoc}
      * @throws \LogicException
      */
-    public function unlock($key)
+    public function unlock($key): bool
     {
         if (!$this->fp) {
             throw new \LogicException('Please use lock() before unlock.');

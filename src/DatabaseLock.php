@@ -37,7 +37,7 @@ class DatabaseLock extends BaseDriver
     /**
      * {@inheritDoc}
      */
-    public function lock($key, $timeout = self::EXPIRE)
+    public function lock($key, $timeout = self::EXPIRE): bool
     {
         // 使用给定的字符串得到一个锁,超时为timeout 秒。
         // 若成功得到锁，则返回 1，若操作超时则返回0 (例如,由于另一个客户端已提前封锁了这个名字 ),若发生错误则返回NULL
@@ -51,7 +51,7 @@ class DatabaseLock extends BaseDriver
     /**
      * {@inheritDoc}
      */
-    public function unlock($key)
+    public function unlock($key): bool
     {
         // RELEASE_LOCK(str) 这个函数的作用是释放名为str的共享锁。
         // 如果锁被成功释放，返回1；如果这个进程没有占有该锁，则返回0；如果这个名为str的锁不存在，则返回NULL。
