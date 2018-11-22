@@ -6,11 +6,11 @@
  * Time: 下午10:04
  */
 
-namespace Inhere\Lock;
+namespace PhpComp\Lock;
 
 /**
  * Class MemcacheLock
- * @package Inhere\Lock
+ * @package PhpComp\Lock
  */
 class MemcacheLock extends BaseDriver
 {

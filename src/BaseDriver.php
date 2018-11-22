@@ -6,18 +6,14 @@
  * Time: 下午10:07
  */
 
-namespace Inhere\Lock;
-
-use MyLib\SimpleConfig\LiteOptionsTrait;
+namespace PhpComp\Lock;
 
 /**
  * Class BaseDriver
- * @package Inhere\Lock
+ * @package PhpComp\Lock
  */
 abstract class BaseDriver implements LockInterface
 {
-    use LiteOptionsTrait;
-
     /**
      * @var string
      */
@@ -83,6 +79,28 @@ abstract class BaseDriver implements LockInterface
     public function __destruct()
     {
         $this->close();
+    }
+
+    /**
+     * Method to get property Options
+     * @return  array
+     */
+    public function getOptions(): array
+    {
+        return $this->options;
+    }
+
+    /**
+     * Method to set property options
+     * @param  array $options
+     * @param  bool $merge
+     * @return static Return self to support chaining.
+     */
+    public function setOptions(array $options, $merge = true)
+    {
+        $this->options = $merge ? array_merge($this->options, $options) : $options;
+
+        return $this;
     }
 
     /**

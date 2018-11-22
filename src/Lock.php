@@ -6,11 +6,11 @@
  * Time: 下午9:52
  */
 
-namespace Inhere\Lock;
+namespace PhpComp\Lock;
 
 /**
  * Class Lock
- * @package Inhere\Lock
+ * @package PhpComp\Lock
  */
 class Lock
 {

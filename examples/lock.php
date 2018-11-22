@@ -7,8 +7,7 @@
  */
 require dirname(__DIR__) . '/../../autoload.php';
 
-
-$lk = \Inhere\Lock\Lock::make([
+$lk = \PhpComp\Lock\Lock::make([
     'driver' => 'file', // sem file
     'tmpDir' => __DIR__
 ]);

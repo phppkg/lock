@@ -1,28 +1,35 @@
 {
-  "name": "inhere/lock",
-  "type": "library",
-  "description": "lock library of the php",
-  "keywords": ["library","lock", "php-lock", "db-lock", "sysvsem-lock", "file-lock","php"],
-  "homepage": "https://github.com/inhere/php-lock",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "inhere",
-      "email": "in.798@qq.com",
-      "homepage": "http://www.yzone.net/"
+    "name": "php-comp/lock",
+    "type": "library",
+    "description": "lock library of the php",
+    "keywords": [
+        "library",
+        "lock",
+        "php-lock",
+        "db-lock",
+        "sysvsem-lock",
+        "file-lock",
+        "php"
+    ],
+    "homepage": "https://github.com/php-comp/lock",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "inhere",
+            "email": "in.798@qq.com",
+            "homepage": "http://www.yzone.net/"
+        }
+    ],
+    "require": {
+        "php": ">7.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhpComp\\Lock\\": "src/"
+        }
+    },
+    "suggest": {
+        "inhere/console": "a lightweight php console application library.",
+        "inhere/php-validate": "Very lightweight data validate tool"
     }
-  ],
-  "require": {
-    "php": ">=7.0.0",
-    "mylib/simple-config": "^1.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "Inhere\\Lock\\" : "src/"
-    }
-  },
-  "suggest": {
-    "inhere/console": "a lightweight php console application library.",
-    "inhere/php-validate": "Very lightweight data validate tool"
-  }
 }

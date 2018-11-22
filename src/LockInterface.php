@@ -6,11 +6,11 @@
  * Time: 下午9:53
  */
 
-namespace Inhere\Lock;
+namespace PhpComp\Lock;
 
 /**
  * Interface LockInterface
- * @package Inhere\Lock
+ * @package PhpComp\Lock
  */
 interface LockInterface
 {

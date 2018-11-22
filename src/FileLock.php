@@ -6,14 +6,14 @@
  * Time: 下午9:53
  */
 
-namespace Inhere\Lock;
+namespace PhpComp\Lock;
 
 /**
  * Class FileLock
  * - file lock
  * - support *nix and windows
  *
- * @package Inhere\Lock
+ * @package PhpComp\Lock
  */
 class FileLock extends BaseDriver
 {

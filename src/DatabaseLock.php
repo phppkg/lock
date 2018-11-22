@@ -6,11 +6,11 @@
  * Time: 下午9:57
  */
 
-namespace Inhere\Lock;
+namespace PhpComp\Lock;
 
 /**
  * Class DatabaseLock
- * @package Inhere\Lock
+ * @package PhpComp\Lock
  */
 class DatabaseLock extends BaseDriver
 {
